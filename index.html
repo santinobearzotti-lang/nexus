@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEXUS · Tutor de clima y medioambiente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="lateral" id="lateral" aria-label="Tus chats">
+      <div class="lateral-cabecera">
+        <span class="marca">NEXUS</span>
+        <button type="button" class="btn-nuevo" id="btn-nuevo">Nuevo chat</button>
+      </div>
+      <nav>
+        <ul class="lista-chats" id="lista-chats"></ul>
+      </nav>
+      <p class="lateral-pie">Tus chats se guardan solo en este navegador.</p>
+    </aside>
+
+    <div class="velo" id="velo"></div>
+
+    <main class="principal">
+      <header class="barra">
+        <button type="button" class="btn-menu" id="btn-menu" aria-controls="lateral" aria-expanded="false">Chats</button>
+        <div class="idiomas" role="group" aria-label="Idioma de las respuestas">
+          <span class="idiomas-titulo">Respondé en</span>
+          {% for codigo, nombre in idiomas.items() %}
+          <button type="button" class="btn-idioma" data-codigo="{{ codigo }}" aria-pressed="false">{{ nombre.title() }}</button>
+          {% endfor %}
+        </div>
+      </header>
+
+      <section class="mensajes" id="mensajes" aria-live="polite"></section>
+
+      <footer class="compositor">
+        <p class="estado" id="estado" role="status"></p>
+        <form class="compositor-form" id="form">
+          <textarea id="texto" rows="1" maxlength="2000" placeholder="Preguntale a NEXUS sobre el clima" aria-label="Tu mensaje"></textarea>
+          <button type="submit" class="btn-enviar" id="btn-enviar">Enviar</button>
+        </form>
+      </footer>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
